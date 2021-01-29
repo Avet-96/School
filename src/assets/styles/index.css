@@ -1,0 +1,82 @@
+
+.navbar_links {
+    list-style-type: none;
+    color: darkgrey;
+    font-size: 16px;
+    border: 1px solid cadetblue;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0px 3px 6px #00000029;
+    text-align: center;
+}
+
+.navbar {
+    background: #a6ccd4b8;
+}
+
+.body {
+    background-image: url('../images/scool.jpg');
+    min-height: 600px;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.title_input {
+    width: 600px;
+    height: 100px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    border: 1px solid darkgrey;
+}
+
+.title_textArea {
+    width: 700px;
+    height: 300px;
+    font-size: 18px;
+    padding: 20px;
+    border: 1px solid darkgrey;
+}
+
+.images_block {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.images_block img {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.button_delete {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    border: 1px solid black;
+    color: red;
+    border-radius: 50%;
+    background: white;
+    font-size: 12px;
+    top: -10px
+}
+
+.slider_block {
+    width: 400px;
+    height: 400px;
+}
+
+.video_block {
+    width: 400px;
+    height: 400px;
+}
+
+.lesson_block {
+    width: 60px;
+    height: 60px;
+}
