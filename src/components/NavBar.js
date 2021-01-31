@@ -27,7 +27,6 @@ class NavBar extends Component {
                                 <Link className='btn btn-info navbar_links p-2'
                                       to='/new-lesson'>Дабавить урок
                                 </Link>
-                                <li className='btn btn-info navbar_links p-2'>Смотреть урок</li>
                             </ul>
                         </nav>
                     </div>
