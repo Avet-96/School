@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ButtonsGroup from "../../helpers/ButtonsGroup";
+import {handleKeyPress} from "../helper-functions/helperfunctions";
 
 class Description extends Component {
     constructor(props) {
@@ -11,21 +12,29 @@ class Description extends Component {
     }
 
 
-    handleKeyPress = (e) => {
-        const {id} = this.props
-        let newArr = JSON.parse(localStorage.getItem('lesson'))
-        if (e.key === 'Enter') {
-            newArr.forEach(v => {
-                if (v.id === id) {
-                    v.value = this.state.description
-                }
-            })
-            localStorage.setItem('lesson', JSON.stringify(newArr))
-            this.setState({isReed: true})
-        }
-    }
+    // handleKeyPress = (e) => {
+    //     const {id} = this.props
+    //     let newArr = JSON.parse(localStorage.getItem('lesson'))
+    //     if (e.key === 'Enter') {
+    //         newArr.forEach(v => {
+    //             if (v.id === id) {
+    //                 v.value = this.state.description
+    //             }
+    //         })
+    //
+    //         localStorage.setItem('lesson', JSON.stringify(newArr))
+    //         this.setState({isReed: true})
+    //     }
+    // }
+
     editHandler = () => {
         this.setState({isReed: false})
+    }
+    keyPress = (e) => {
+        handleKeyPress(e, this.state.description, this.props.id)
+        if (e.key === 'Enter') {
+            return this.setState({isReed: true})
+        }
     }
 
     render() {
@@ -37,7 +46,7 @@ class Description extends Component {
                         name='description'
                         value={this.state.description}
                         onChange={e => this.setState({description: e.target.value})}
-                        onKeyDown={e => this.handleKeyPress(e)}
+                        onKeyDown={e => this.keyPress(e)}
                         readOnly={this.state.isReed}
                         placeholder='Наш Загаловок'
                     />

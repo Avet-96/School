@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Images = (props) => {
-    console.log(props)
     return (
         <div>
             {props.value}

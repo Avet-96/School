@@ -26,7 +26,6 @@ let dbData = []
 let localData = JSON.parse(localStorage.getItem('lesson'))
 
 
-
 class BuldNewLesson extends Component {
     constructor(props) {
         super(props);
@@ -152,7 +151,11 @@ class BuldNewLesson extends Component {
         let iDa = Date.now()
 
         localData = this.state.compList
-        localData = [{id: iDa, name, component: <TagName props={this.rendFunctions()} id={iDa}/>}, ...localData];
+        localData = [{
+            id: iDa,
+            name,
+            component: <TagName newArr={localData} props={this.rendFunctions()} id={iDa}/>
+        }, ...localData];
 
         this.setState({compList: localData})
         this.saveData(name, iDa)
@@ -161,12 +164,11 @@ class BuldNewLesson extends Component {
 
     //save data to db
     saveData = (name, id) => {
+        dbData = JSON.parse(localStorage.getItem('lesson')) ?? []
         let obj = {}
         obj = {id, name: name, value: ''}
         dbData = [obj, ...dbData]
         localStorage.setItem('lesson', JSON.stringify(dbData))
-
-
     }
     saveFoolData = () => {
         if (localData !== null) {

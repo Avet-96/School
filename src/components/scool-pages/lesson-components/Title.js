@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ButtonsGroup from "../../helpers/ButtonsGroup";
+import {handleKeyPress} from "../helper-functions/helperfunctions";
 
 
 class Title extends Component {
@@ -11,22 +12,29 @@ class Title extends Component {
         }
     }
 
-    handleKeyPress = (e) => {
-        const {id} = this.props
-        let newArr = JSON.parse(localStorage.getItem('lesson'))
-        if (e.key === 'Enter') {
-            newArr.forEach(v => {
-                if (v.id === id) {
-                    v.value = this.state.title
-                }
-            })
-            localStorage.setItem('lesson', JSON.stringify(newArr))
-            this.setState({isReed: true})
-        }
-    }
+    // handleKeyPress = (e) => {
+    //     const {id} = this.props
+    //     let newArr = JSON.parse(localStorage.getItem('lesson'))
+    //     if (e.key === 'Enter') {
+    //         newArr.forEach(v => {
+    //             if (v.id === id) {
+    //                 v.value = this.state.title
+    //             }
+    //         })
+    //         localStorage.setItem('lesson', JSON.stringify(newArr))
+    //         this.setState({isReed: true})
+    //
+    //     }
+    // }
 
     editHandler = () => {
         this.setState({isReed: false})
+    }
+    keyPress = (e) => {
+        handleKeyPress(e, this.state.title, this.props.id)
+        if (e.key === 'Enter') {
+            return this.setState({isReed: true})
+        }
     }
 
 
@@ -40,7 +48,7 @@ class Title extends Component {
                         name='title'
                         value={this.state.title}
                         onChange={e => this.setState({title: e.target.value})}
-                        onKeyDown={e => this.handleKeyPress(e)}
+                        onKeyDown={e => this.keyPress(e)}
                         readOnly={this.state.isReed}
                         placeholder='Наш Загаловок'
                     />

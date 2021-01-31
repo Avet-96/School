@@ -1,7 +1,6 @@
 import React from 'react'
 
 const File = (props) => {
-    console.log(props, 'file')
     return (
         <div>
             {props.value.length !== 0 ?
