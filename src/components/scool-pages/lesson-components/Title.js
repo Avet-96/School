@@ -12,21 +12,6 @@ class Title extends Component {
         }
     }
 
-    // handleKeyPress = (e) => {
-    //     const {id} = this.props
-    //     let newArr = JSON.parse(localStorage.getItem('lesson'))
-    //     if (e.key === 'Enter') {
-    //         newArr.forEach(v => {
-    //             if (v.id === id) {
-    //                 v.value = this.state.title
-    //             }
-    //         })
-    //         localStorage.setItem('lesson', JSON.stringify(newArr))
-    //         this.setState({isReed: true})
-    //
-    //     }
-    // }
-
     editHandler = () => {
         this.setState({isReed: false})
     }
@@ -36,7 +21,6 @@ class Title extends Component {
             return this.setState({isReed: true})
         }
     }
-
 
     render() {
         return (
