@@ -1,25 +1,16 @@
 import React, {useState} from 'react'
 import Carousel from 'nuka-carousel';
 import ButtonsGroup from "../../helpers/ButtonsGroup";
+import {returnDataArr} from "../helper-functions/helperfunctions";
 
-let arr = []
 
 const SliderBlock = (props) => {
 
     let [imageList, setImageList] = useState([])
 
     const imageUrl = (file) => {
-        let newArr = JSON.parse(localStorage.getItem('lesson'))
-        let dataURL = URL.createObjectURL(file.target.files[0])
-        newArr.forEach(v => {
-            if (v.id === props.id) {
-                arr = [dataURL, ...arr]
-                v.value = arr
-            }
-        })
-        localStorage.setItem('lesson', JSON.stringify(newArr))
         setImageList(prev => {
-            return [...prev, dataURL]
+            return [...prev,    returnDataArr(file, props.id)]
         })
         file.target.value = '';
     };

@@ -1,43 +1,20 @@
 import React, {useState} from 'react';
 import ButtonsGroup from "../../helpers/ButtonsGroup";
+import {deletePhoto, returnDataArr} from "../helper-functions/helperfunctions";
 
-let arr = []
 
 const Photo = (props) => {
     let [imagesList, setImagesList] = useState([])
 
-    const imageUrl =  (file) => {
-        let newArr = JSON.parse(localStorage.getItem('lesson'))
-        let dataURL = URL.createObjectURL(file.target.files[0])
-
-        newArr.forEach(v => {
-            if (v.id === props.id) {
-                arr = [dataURL, ...arr]
-                v.value = arr
-            }
-        })
-        localStorage.setItem('lesson', JSON.stringify(newArr))
-        setImagesList(prev => {
-            return [...prev, dataURL]
-        })
+    const imageUrl = (file) => {
+        let dataUrl = returnDataArr(file, props.id)
+        setImagesList(prev => [...prev, dataUrl])
         file.target.value = '';
-
     };
 
     const deleteImage = (index) => {
-        let newArr = JSON.parse(localStorage.getItem('lesson'))
-
-        arr.splice(index, 1)
-        imagesList.splice(index, 1);
-        newArr.forEach(v => {
-            if (v.id === props.id) {
-                v.value = arr
-            }
-        })
-
-        localStorage.setItem('lesson', JSON.stringify(newArr))
+        deletePhoto(index, imagesList, props.id)
         setImagesList([...imagesList])
-
     }
 
     return (
