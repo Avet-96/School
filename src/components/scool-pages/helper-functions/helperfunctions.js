@@ -1,6 +1,5 @@
 let arr = []
 
-
 export const handleKeyPress = (e, text, id) => {
     let newArr = JSON.parse(localStorage.getItem('lesson'))
     if (e.key === 'Enter') {

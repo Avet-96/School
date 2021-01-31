@@ -13,7 +13,7 @@ import Modal from "../helpers/Modal";
 
 
 // components list
-let componentsArr = [
+const componentsArr = [
     {component: Title, name: 'title'},
     {component: Description, name: 'description'},
     {component: Photo, name: 'photo'},
