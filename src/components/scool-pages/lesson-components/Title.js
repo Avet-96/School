@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ButtonsGroup from "../../helpers/ButtonsGroup";
-import CloneType from "../../helpers/CloneType";
 
 
 class Title extends Component {
@@ -13,15 +12,19 @@ class Title extends Component {
     }
 
     handleKeyPress = (e) => {
+        const {id} = this.props
+        let newArr = JSON.parse(localStorage.getItem('lesson'))
         if (e.key === 'Enter') {
-            this.setState({isReed: true})
-            let newArr = JSON.parse(localStorage.getItem('lesson'))
-            newArr[0].title = [this.state.title];
+            newArr.forEach(v => {
+                if (v.id === id) {
+                    v.value = this.state.title
+                }
+            })
             localStorage.setItem('lesson', JSON.stringify(newArr))
+            this.setState({isReed: true})
         }
-
-
     }
+
     editHandler = () => {
         this.setState({isReed: false})
     }
@@ -31,24 +34,23 @@ class Title extends Component {
         return (
             <div className='w-100'>
                 <div className='container mb-2 mt-2 w-100 d-flex justify-content-center col-7'>
-                    <input type="text"
-                           className='title_input'
-                           name='title'
-                           value={this.state.title}
-                           onChange={e => this.setState({title: e.target.value})}
-                           onKeyDown={e => this.handleKeyPress(e)}
-                           readOnly={this.state.isReed}
-                           placeholder='Наш Загаловок'
+                    <input
+                        type="text"
+                        className='title_input'
+                        name='title'
+                        value={this.state.title}
+                        onChange={e => this.setState({title: e.target.value})}
+                        onKeyDown={e => this.handleKeyPress(e)}
+                        readOnly={this.state.isReed}
+                        placeholder='Наш Загаловок'
                     />
                 </div>
-                <ButtonsGroup editText={this.editHandler}
-                              functions={this.props.props}
-                              id={this.props.id}
-                />
-                <CloneType
+                <ButtonsGroup
+                    editText={this.editHandler}
+                    functions={this.props.props}
                     id={this.props.id}
-                    cloneData={this.props.props.cloneBlock}
                 />
+
                 <hr/>
             </div>
         );

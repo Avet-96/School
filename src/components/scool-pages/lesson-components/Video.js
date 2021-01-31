@@ -1,12 +1,10 @@
 import React, {useState, useRef} from 'react'
 import ButtonsGroup from "../../helpers/ButtonsGroup";
-import CloneType from "../../helpers/CloneType";
 
 const Vidoe = (props) => {
 
     const [videoSrc, setVideoSrc] = useState('')
     const inputEl = useRef(null);
-
 
     const readVideo = (event) => {
         if (event.target.files && event.target.files[0]) {
@@ -15,7 +13,6 @@ const Vidoe = (props) => {
                 setVideoSrc(e.target.result)
                 inputEl.current.load()
             }
-
             reader.readAsDataURL(event.target.files[0]);
         }
     }
@@ -23,7 +20,7 @@ const Vidoe = (props) => {
     return (
         <div className='w-100'>
 
-            <div className='ml-5 d-flex flex-column align-items-center'>
+            <div className='ml-5 mb-5 video_content d-flex flex-column align-items-center'>
                 <div className='video_block'>
                     <input type="file"
                            accept="video/*"
@@ -37,19 +34,14 @@ const Vidoe = (props) => {
                         Your browser does not support the video tag.
                     </video>
                 </div>
-
             </div>
             <ButtonsGroup
                 functions={props.props}
                 id={props.id}
             />
-            <CloneType
-                id={props.id}
-                cloneData={props.props.cloneBlock}
-            />
             <hr/>
         </div>
-
     )
 }
 export default Vidoe
+

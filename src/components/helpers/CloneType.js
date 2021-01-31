@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 
 const CloneType = (props) => {
     return <div className='d-flex justify-content-center'>
-        <button className='btn btn-info rounded-circle' onClick={() => props.cloneData(props.id)}><span
-            className='text font-weight-bold h4'>+</span>
+        <button className='btn btn-info rounded-circle'><span
+            className='text font-weight-bold h4' onClick={() => props.addCategories(true)}>+</span>
         </button>
     </div>
 }

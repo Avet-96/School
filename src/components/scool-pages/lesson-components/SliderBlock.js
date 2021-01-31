@@ -1,34 +1,28 @@
 import React, {useState} from 'react'
 import Carousel from 'nuka-carousel';
 import ButtonsGroup from "../../helpers/ButtonsGroup";
-import CloneType from "../../helpers/CloneType";
 
+let arr = []
 
 const SliderBlock = (props) => {
 
     let [imageList, setImageList] = useState([])
 
     const imageUrl = (file) => {
-        let input = file.target;
-        let reader = new FileReader();
-        reader.onload = function () {
-            let newArr = JSON.parse(localStorage.getItem('lesson'))
-            let dataURL = reader.result;
-            setImageList(prev => [...prev, dataURL])
-            newArr[0].images = imageList
-            localStorage.setItem('lesson', JSON.stringify(newArr))
-        };
-        reader.readAsDataURL(input.files[0]);
+        let newArr = JSON.parse(localStorage.getItem('lesson'))
+        let dataURL = URL.createObjectURL(file.target.files[0])
+        newArr.forEach(v => {
+            if (v.id === props.id) {
+                arr = [dataURL, ...arr]
+                v.value = arr
+            }
+        })
+        localStorage.setItem('lesson', JSON.stringify(newArr))
+        setImageList(prev => {
+            return [...prev, dataURL]
+        })
         file.target.value = '';
     };
-    const deleteImage = (index) => {
-        if (index > imageList.length) return alert('not this images')
-        let newArr = JSON.parse(localStorage.getItem('lesson'))
-        imageList.splice(index, 1);
-        setImageList([...imageList])
-        newArr[0].images = imageList
-        localStorage.setItem('lesson', JSON.stringify(newArr))
-    }
 
     return (
         <div className='mt-5 w-100'>
@@ -44,20 +38,13 @@ const SliderBlock = (props) => {
 
             </div>
             <div className='d-flex flex-column align-items-center'>
-                <input type="number"
-                       placeholder='delete images number'
-                       onChange={(e) => deleteImage(e.target.value)}
-                />
                 <input type='file' accept='image/*' onChange={e => imageUrl(e)}/><br/>
                 <ButtonsGroup
                     functions={props.props}
                     id={props.id}
                 />
             </div>
-            <CloneType
-                id={props.id}
-                cloneData={props.cloneBlock}
-            />
+
             <hr/>
         </div>
     )

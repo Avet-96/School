@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import emptyCache from "./helpers/clearCech";
 
-let data = []
 
 class NavBar extends Component {
     constructor(props) {
@@ -9,27 +9,9 @@ class NavBar extends Component {
         this.state = {}
     }
 
-    componentDidMount() {
-        if (localStorage.getItem('lesson') === null) {
-            localStorage.setItem('lesson', JSON.stringify(data))
-
-        }
-    }
-
     createLesson = () => {
-        let lesson = {
-            id: Date.now(),
-            title: [],
-            description: [],
-            photo: [],
-            slider: [],
-            images: [],
-            video: [],
-            file: []
-        }
-        let newArr = JSON.parse(localStorage.getItem('lesson'))
-        data = [lesson, ...newArr]
-        localStorage.setItem('lesson', JSON.stringify(data))
+        localStorage.removeItem('lesson')
+        emptyCache()
     }
 
     render() {

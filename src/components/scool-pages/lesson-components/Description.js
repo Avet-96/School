@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ButtonsGroup from "../../helpers/ButtonsGroup";
-import CloneType from "../../helpers/CloneType";
 
 class Description extends Component {
     constructor(props) {
@@ -13,11 +12,16 @@ class Description extends Component {
 
 
     handleKeyPress = (e) => {
+        const {id} = this.props
+        let newArr = JSON.parse(localStorage.getItem('lesson'))
         if (e.key === 'Enter') {
-            this.setState({isReed: true})
-            let newArr = JSON.parse(localStorage.getItem('lesson'))
-            newArr[0].description = [this.state.description];
+            newArr.forEach(v => {
+                if (v.id === id) {
+                    v.value = this.state.description
+                }
+            })
             localStorage.setItem('lesson', JSON.stringify(newArr))
+            this.setState({isReed: true})
         }
     }
     editHandler = () => {
@@ -42,10 +46,6 @@ class Description extends Component {
                     editText={this.editHandler}
                     functions={this.props.props}
                     id={this.props.id}
-                />
-                <CloneType
-                    id={this.props.id}
-                    cloneData={this.props.props.cloneBlock}
                 />
                 <hr/>
             </div>

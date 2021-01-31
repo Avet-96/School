@@ -4,11 +4,21 @@ const ButtonsGroup = (props) => {
     const {downListData, upListData, deleteListData} = props.functions
     const {editText, id} = props
 
+    let buttonGroup = [
+        {id, click: upListData, title: 'Верх', style: 'btn-dark mr-2'},
+        {id, click: downListData, title: 'Вниз', style: 'btn-dark mr-2'},
+        {id, click: deleteListData, title: 'Удалить', style: 'btn-danger mr-2'}
+    ]
+
     return <div>
-        <button className="btn btn-dark mr-2" onClick={() => upListData(id)}>Up</button>
-        <button className="btn btn-dark mr-2" onClick={() => downListData(id)}>Down</button>
-        <button className="btn btn-info mr-2" onClick={editText}>Edit</button>
-        <button className="btn btn-danger" onClick={() => deleteListData(id)}>Delete</button>
+        {buttonGroup.map(v => (
+            <button
+                key={v.title}
+                className={`btn ${v.style}`}
+                onClick={() => v.click(v.id)}
+            >{v.title}</button>
+        ))}
+        {editText !== undefined ? <button className="btn btn-info" onClick={editText}>Edit</button> : ''}
     </div>
 }
 

@@ -1,36 +1,44 @@
 import React, {useState} from 'react';
 import ButtonsGroup from "../../helpers/ButtonsGroup";
-import CloneType from "../../helpers/CloneType";
 
+let arr = []
 
 const Photo = (props) => {
-
     let [imagesList, setImagesList] = useState([])
 
-    const imageUrl = async (file) => {
-        let input = file.target;
-        let reader = new FileReader();
-        reader.onload = function () {
-            let dataURL = reader.result;
-            setImagesList(prev => {
-                let newArr = JSON.parse(localStorage.getItem('lesson'))
-                newArr[0].images = [...prev]
-                localStorage.setItem('lesson', JSON.stringify(newArr))
-                return [...prev, dataURL]
-            })
+    const imageUrl =  (file) => {
+        let newArr = JSON.parse(localStorage.getItem('lesson'))
+        let dataURL = URL.createObjectURL(file.target.files[0])
 
-        };
-        reader.readAsDataURL(input.files[0]);
+        newArr.forEach(v => {
+            if (v.id === props.id) {
+                arr = [dataURL, ...arr]
+                v.value = arr
+            }
+        })
+        localStorage.setItem('lesson', JSON.stringify(newArr))
+        setImagesList(prev => {
+            return [...prev, dataURL]
+        })
         file.target.value = '';
 
     };
 
     const deleteImage = (index) => {
-        imagesList.splice(index, 1);
-        setImagesList([...imagesList])
         let newArr = JSON.parse(localStorage.getItem('lesson'))
-        newArr[0].images = imagesList;
+
+        arr.splice(index, 1)
+        imagesList.splice(index, 1);
+
+        newArr.forEach(v => {
+            if (v.id === props.id) {
+                v.value = arr
+            }
+        })
+
         localStorage.setItem('lesson', JSON.stringify(newArr))
+        setImagesList([...imagesList])
+
     }
 
     return (
@@ -49,10 +57,7 @@ const Photo = (props) => {
                 id={props.id}
             />
 
-            <CloneType
-                id={props.id}
-                cloneData={props.props.cloneBlock}
-            />
+
             <hr/>
         </div>
     );

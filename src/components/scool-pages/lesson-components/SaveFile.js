@@ -1,20 +1,20 @@
 import React, {useState} from 'react'
 import ButtonsGroup from "../../helpers/ButtonsGroup";
-import CloneType from "../../helpers/CloneType";
 
-
+let data = []
 const SaveFile = (props) => {
 
     const [file, setFile] = useState([])
     const saveFile = (e) => {
-
-        setFile(prev => {
-            let newArr = JSON.parse(localStorage.getItem('lesson'))
-            newArr[0].file = [e.target.value, ...prev];
-            localStorage.setItem('lesson', JSON.stringify(newArr))
-            return [e.target.value, ...prev]
+        let newArr = JSON.parse(localStorage.getItem('lesson'))
+        newArr.forEach(v => {
+            if (v.id === props.id) {
+                data = [e.target.value, ...data]
+                v.value = data
+            }
         })
-
+        localStorage.setItem('lesson', JSON.stringify(newArr))
+        setFile(prev => [e.target.value, ...prev])
     }
 
     return (
@@ -29,10 +29,7 @@ const SaveFile = (props) => {
             <div>
                 {file.map((v, i) => <p key={i}>{v}</p>)}
             </div>
-            <CloneType
-                id={props.id}
-                cloneData={props.props.cloneBlock}
-            />
+
             <hr/>
         </div>
     )

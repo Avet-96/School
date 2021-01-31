@@ -1,25 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import NavBar from "./NavBar";
 import Classes from "./scool-pages/Classes";
 import Wrapper from "./wrapper/Wrapper";
 import Lesson from "./lesson/Lesson";
 
 const Home = () => {
-    let data = JSON.parse(localStorage.getItem('lesson'))
+    let data = JSON.parse(localStorage.getItem('fullData'))
 
     let [classList, setClassList] = useState(data)
     let [renderData, setRenderData] = useState([])
+    let [dataList, setDataList] = useState([])
+
     const addNewLesson = () => {
         let newData = {
             id: Date.now(),
         }
         setClassList(prev => [newData, ...prev])
     }
-    const renderBlock = (id) => {
-        classList.filter(v => {
-            if (v.id === id) {
+    const renderBlock = (index, data) => {
+        setDataList(data)
+        classList.filter((v, i) => {
+            if (i === index) {
                 setRenderData([v])
-                return v
             }
         })
     }
@@ -30,16 +32,22 @@ const Home = () => {
                 addArray={addNewLesson}
             />
             <div className='container d-flex  flex-column  mt-4'>
-              <div className='container d-flex'>
-                  {classList !== null ? classList.map(v => <Classes
-                      key={v.id}
-                      props={v}
-                      rendBlock={renderBlock}
-                  />) : ''}
-              </div>
+                <div className='container d-flex'>
+                    {classList !== null ? classList.map((v, i) =>
+                        <div key={i}>
+                            <Classes
+                                props={v}
+                                index={i}
+                                renderData={renderData}
+                                rendBlock={renderBlock}
+                            />
+                        </div>) : ''}
+                </div>
 
                 <Wrapper>
-                    <Lesson props={renderData}/>
+                    <Lesson
+                        componentList={dataList}
+                    />
                 </Wrapper>
             </div>
 
