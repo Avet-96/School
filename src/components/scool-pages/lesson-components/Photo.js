@@ -29,7 +29,6 @@ const Photo = (props) => {
 
         arr.splice(index, 1)
         imagesList.splice(index, 1);
-
         newArr.forEach(v => {
             if (v.id === props.id) {
                 v.value = arr

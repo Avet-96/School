@@ -1,9 +1,14 @@
 import React from 'react'
 
 const Images = (props) => {
+    console.log(props)
     return (
         <div>
-            <img src="/" alt="images"/>
+            {props.value}
+            {props.value.length !== 0 ?
+                props.value.map((url, i) => <img key={i}
+                                                 src={url} alt="images"/>)
+                : <p>фото не найдено</p>}
         </div>
     )
 }

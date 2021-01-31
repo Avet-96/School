@@ -4,9 +4,11 @@ import Carousel from "nuka-carousel";
 const Slider = (props) => {
     return (
         <div>
-            <Carousel>
-                <img src="" alt="images"/>
-            </Carousel>
+            {props.value.length !== 0 ?
+                props.value.map(url => <Carousel>
+                        <img src={url} alt="images"/>
+                    </Carousel>
+                ) : <p>фото не наидено</p>}
         </div>
     )
 }

@@ -3,7 +3,7 @@ import React from 'react'
 const Video = (props) => {
     return (
         <div>
-            <img src="/" alt="images"/>
+            <p>Нет фидео</p>
         </div>
     )
 }
