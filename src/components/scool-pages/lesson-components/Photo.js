@@ -24,7 +24,7 @@ const Photo = (props) => {
                 {imagesList.map((v, i) =>
                     <div key={i} className='images_block m-2'>
                         <button className='button_delete' onClick={() => deleteImage(i)}>X</button>
-                        <img src={v} width='100%' height='100%'/>
+                        <img src={v} width='100%' height='100%' alt='iuo'/>
                     </div>)}
             </div>
             <input type='file' accept='image/*' onChange={e => imageUrl(e)}/><br/>

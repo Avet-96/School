@@ -24,6 +24,7 @@ const SliderBlock = (props) => {
                         key={i}
                         width='100%'
                         height='100%'
+                        alt='uiou'
                     />)}
                 </Carousel>
 

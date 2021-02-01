@@ -1,7 +1,7 @@
 import Home from "../components/Home";
 import BuldNewLesson from "../components/scool-pages/BuldNewLesson";
 
-export default {
+const routerComponents = {
     home: {
         component: Home,
         path: '/',
@@ -12,3 +12,5 @@ export default {
     },
 
 }
+
+export default routerComponents

@@ -1,14 +1,12 @@
 import React, {useState} from 'react'
 import ButtonsGroup from "../../helpers/ButtonsGroup";
-import {returnDataArr} from "../helper-functions/helperfunctions";
 
 let data = []
 const SaveFile = (props) => {
 
     const [file, setFile] = useState([])
     const saveFile = (e) => {
-        let newArr = returnDataArr()
-
+        let newArr = JSON.parse(localStorage.getItem('lesson'))
         newArr.forEach(v => {
             if (v.id === props.id) {
                 data = [e.target.value, ...data]

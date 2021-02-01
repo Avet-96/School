@@ -19,7 +19,7 @@ const Home = () => {
     }
     const renderBlock = (index, data) => {
         setDataList(data)
-        classList.filter((v, i) => {
+        classList.forEach((v, i) => {
             if (i === index) {
                 setRenderData([v])
             }
